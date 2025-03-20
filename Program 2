@@ -1,0 +1,17 @@
+# Program to count lines, words, and characters in a text file
+def count_file_content(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            content = file.read()
+            num_lines = content.count('\n') + 1
+            num_words = len(content.split())
+            num_characters = len(content)
+            
+            print(f"Number of lines: {num_lines}")
+            print(f"Number of words: {num_words}")
+            print(f"Number of characters: {num_characters}")
+    except FileNotFoundError:
+        print(f"The file '{file_name}' was not found.")
+
+file_name = input("Enter the file name: ")
+count_file_content(file_name)
