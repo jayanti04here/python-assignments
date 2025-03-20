@@ -1,0 +1,13 @@
+# Program to find the largest number in a list
+def find_largest(numbers):
+    if not numbers:
+        return None
+    return max(numbers)
+
+numbers = list(map(int, input("Enter the numbers separated by spaces: ").split()))
+largest = find_largest(numbers)
+
+if largest is not None:
+    print(f"The largest number is: {largest}")
+else:
+    print("The list is empty.")
