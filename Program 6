@@ -1,0 +1,16 @@
+#!/bin/bash
+THRESHOLD=80
+
+echo "Checking for processes consuming more than ${THRESHOLD}% CPU..."
+
+ps -eo pid,comm,%cpu --sort=-%cpu | awk -v threshold="$THRESHOLD" '$3 > threshold {print $1, $2, $3}' | while read -r pid cmd cpu; do
+    echo "Process $cmd (PID: $pid) is using $cpu% CPU. Killing..."
+    sudo kill -9 "$pid"
+    if [[ $? -eq 0 ]]; then
+        echo "Process $cmd (PID: $pid) killed successfully."
+    else
+        echo "Failed to kill process $cmd (PID: $pid)."
+    fi
+done
+
+echo "High CPU usage processes have been handled."
